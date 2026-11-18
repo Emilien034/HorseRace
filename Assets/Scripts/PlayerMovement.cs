@@ -3,8 +3,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rbPlayer;
-    [SerializeField] private float speed = 5.0f;
-    
+    [SerializeField] private float forwardForce = 5.0f;
+    [SerializeField] private float sidewaysForce;
+
 
     void Start()
     {
@@ -13,6 +14,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rbPlayer.AddForce(0.0f, 0.0f, speed);
+        rbPlayer.AddForce(0.0f, 0.0f, forwardForce);
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rbPlayer.AddForce(-sidewaysForce, 0.0f, 0.0f, ForceMode.VelocityChange);
+        } else if (Input.GetKey(KeyCode.D))
+        {
+            rbPlayer.AddForce(sidewaysForce, 0.0f, 0.0f, ForceMode.VelocityChange);
+        }
     }
 }
